@@ -1,6 +1,7 @@
 #include "net.h"
 #include <vector>
 #include <iostream>
+#include <cmath>
 
 
 int main() {
@@ -8,6 +9,7 @@ int main() {
     topology.push_back(2); // input
     topology.push_back(5); // hidden
     topology.push_back(1); // output
+
     Net net(topology);
 
     const std::vector<double> inputVals[4] = {
@@ -19,22 +21,23 @@ int main() {
 
 
     for (int i = 0; i < 1000; ++i) {
-//        std::cout << "start generation: " << i << std::endl;
         for (int j = 0; j < 4; ++j) {
             net.feedForward(inputVals[j]); // training
             net.backProp(targetVals[j]);
         }
-//        std::cout << "end generation" << std::endl;
     }
 
     net.feedForward(inputVals[0]);
     std::vector<double> resultVals;
     for (int j = 0; j < 4; ++j) {
-        std::cout << "input: " << inputVals[j][0] << ", " << inputVals[j][1] << std::endl;
-        std::cout << "output: ";
+        std::cout << "input: " << inputVals[j][0] << ", " << inputVals[j][1];
+        std::cout << " :: output: ";
         net.feedForward(inputVals[j]);
         net.getResults(resultVals);
-        std::cout << resultVals[0] << std::endl;
+        std::cout << std::round(resultVals[0]) << std::endl;
     }
+
+
+
     return 0;
 }
