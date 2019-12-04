@@ -2,42 +2,39 @@
 #include <vector>
 #include <iostream>
 
-using namespace std;
 
 int main() {
-    vector<unsigned> topology;
+    std::vector<unsigned> topology;
     topology.push_back(2); // input
     topology.push_back(5); // hidden
     topology.push_back(1); // output
     Net net(topology);
 
-    const vector<double> inputVals[4] = {
+    const std::vector<double> inputVals[4] = {
         {0, 0}, {0, 1}, {1, 0}, {1, 1}
     };
-    const vector<double> targetVals[4] = {
+    const std::vector<double> targetVals[4] = {
         {0}, {1}, {1}, {0}
     };
-    cout << inputVals[0][0] << endl;
+
 
     for (int i = 0; i < 1000; ++i) {
-        cout << "start generation: " << i << endl;
+//        std::cout << "start generation: " << i << std::endl;
         for (int j = 0; j < 4; ++j) {
-            cout << j << endl;
             net.feedForward(inputVals[j]); // training
             net.backProp(targetVals[j]);
         }
-        cout << "end generation" << endl;
+//        std::cout << "end generation" << std::endl;
     }
 
     net.feedForward(inputVals[0]);
-    vector<double> resultVals;
+    std::vector<double> resultVals;
     for (int j = 0; j < 4; ++j) {
-        cout << "input: " << inputVals[j][0] << ", " << inputVals[j][1] << endl;
-        cout << "output: ";
+        std::cout << "input: " << inputVals[j][0] << ", " << inputVals[j][1] << std::endl;
+        std::cout << "output: ";
         net.feedForward(inputVals[j]);
         net.getResults(resultVals);
-        cout << resultVals[0] << endl;
+        std::cout << resultVals[0] << std::endl;
     }
-    cout << "end" << endl;
     return 0;
 }

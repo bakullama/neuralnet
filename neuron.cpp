@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <cmath>
 
+
 Neuron::Neuron(unsigned numOutputs, unsigned myIndex)
 {
 

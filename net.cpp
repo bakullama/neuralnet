@@ -5,16 +5,24 @@
 #include <cassert>
 #include <cmath>
 
-using namespace std;
 
 Net::~Net() {
-    delete(&m_layers);
+    for (unsigned layer = 0; layer < m_layers.size(); ++layer) {
+        for (unsigned i = 0; i < m_layers[layer].size(); ++i) {
+            for (unsigned j = 0; j < m_layers[layer][j].m_outputWeights.size(); ++j) {
+                delete(&m_layers[layer][j].m_outputWeights[j]);
+            }
+            delete(&m_layers[layer][i]);
+        }
+        delete(&m_layers[layer]);
+    }
+    delete (&m_layers);
     delete(&m_error);
     delete(&m_recentAverageError);
     delete(&m_recentAverageSmoothingFactor);
 }
 
-Net::Net(const vector<unsigned> &topology)
+Net::Net(const std::vector<unsigned> &topology)
 {
 
 
@@ -23,43 +31,46 @@ Net::Net(const vector<unsigned> &topology)
 
         m_layers.push_back(Layer()); // create new empty layer and append to m_layers
         unsigned numOutputs = layerNum == topology.size() - 1 ? 0 : topology[layerNum + 1];
-        cout << "new layer " << layerNum << endl;
+//        std::cout << "new layer " << layerNum << std::endl;
         // fillin new layer with neurons
         for (unsigned neuronNum = 0; neuronNum <= topology[layerNum]; ++neuronNum) { // <= means 1 extra neuron to act as bias for the layer
             m_layers.back().push_back(Neuron(numOutputs, neuronNum));
-            cout << "new neuron" << endl;
+//            std::cout << "new neuron" << std::endl;
         }
     }
 
-    // force bias to 1.0
+    // force last bias to 1.0
     m_layers.back().back().setOutputVal(1.0);
 }
 
-void Net::getResults(vector<double> &resultVals) const {
+void Net::getResults(std::vector<double> &resultVals) const {
     resultVals.clear();
     for (unsigned neuronNum = 0; neuronNum < m_layers.back().size() - 1; ++neuronNum) {
         resultVals.push_back(m_layers.back()[neuronNum].getOutputVal());
     }
 }
 
-void Net::feedForward(const vector<double> &inputVals) {
+void Net::feedForward(const std::vector<double> &inputVals) {
 
-    assert(inputVals.size() == m_layers[0].size() - 1);
-    // assign input values to input neurons
-    for (unsigned inputNum = 0; inputNum < inputVals.size(); ++inputNum) {
-        m_layers[0][inputNum].setOutputVal(inputVals[inputNum]);
-    }
-
-    // forward propagate
-    for (unsigned layerNum = 1; layerNum < m_layers.size(); ++layerNum) { // starting at 1 as input layer already set
-        Layer &prevLayer = m_layers[layerNum - 1]; // pointer to previous layer
-        for (unsigned neuronNum = 0; neuronNum < m_layers[layerNum].size() - 1; ++neuronNum) {
-            m_layers[layerNum][neuronNum].feedForward(prevLayer);
+    if (inputVals.size() == m_layers[0].size() - 1) {
+        // assign input values to input neurons
+        for (unsigned inputNum = 0; inputNum < inputVals.size(); ++inputNum) {
+            m_layers[0][inputNum].setOutputVal(inputVals[inputNum]);
         }
+
+        // forward propagate
+        for (unsigned layerNum = 1; layerNum < m_layers.size(); ++layerNum) { // starting at 1 as input layer already set
+            Layer &prevLayer = m_layers[layerNum - 1]; // pointer to previous layer
+            for (unsigned neuronNum = 0; neuronNum < m_layers[layerNum].size() - 1; ++neuronNum) {
+                m_layers[layerNum][neuronNum].feedForward(prevLayer);
+            }
+        }
+    } else {
+        throw "Incorrect Dimensions";
     }
 }
 
-void Net::backProp(const vector<double> &targetVals) {
+void Net::backProp(const std::vector<double> &targetVals) {
     // calculate overall net error (Root Mean Square error of output neuronNum errors)
     Layer &outputLayer = m_layers.back();
     m_error = 0.0;

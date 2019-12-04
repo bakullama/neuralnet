@@ -3,12 +3,10 @@
 #include <vector>
 #include "connection.h"
 
-using namespace std;
-
 
 class Neuron
 {
-    typedef vector<Neuron> Layer;
+    typedef std::vector<Neuron> Layer;
 
 public:
     Neuron(unsigned numOutputs, unsigned myIndex);
@@ -22,7 +20,7 @@ public:
 
     void updateInputWeights(Layer& prevLayer);
 
-
+    std::vector<Connection> m_outputWeights;
 private:
     static double randomWeight();
 
@@ -34,7 +32,7 @@ private:
     double m_outputVal;
     unsigned m_myIndex;
     double m_gradient;
-    vector<Connection> m_outputWeights;
+
 
     static double lr;
 
