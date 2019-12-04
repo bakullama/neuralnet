@@ -27,14 +27,14 @@ int main() {
         }
     }
 
-    net.feedForward(inputVals[0]);
+
     std::vector<double> resultVals;
     for (int j = 0; j < 4; ++j) {
-        std::cout << "input: " << inputVals[j][0] << ", " << inputVals[j][1];
-        std::cout << " :: output: ";
+        std::cout << "input: | " << inputVals[j][0] << " | " << inputVals[j][1];
+        std::cout << " | :: output: ";
         net.feedForward(inputVals[j]);
         net.getResults(resultVals);
-        std::cout << std::round(resultVals[0]) << std::endl;
+        std::cout << resultVals[0] << std::endl;
     }
 
 

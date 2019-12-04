@@ -7,19 +7,22 @@
 
 
 Net::~Net() {
-    for (unsigned layer = 0; layer < m_layers.size(); ++layer) {
-        for (unsigned i = 0; i < m_layers[layer].size(); ++i) {
-            for (unsigned j = 0; j < m_layers[layer][j].m_outputWeights.size(); ++j) {
-                delete(&m_layers[layer][j].m_outputWeights[j]);
-            }
-            delete(&m_layers[layer][i]);
-        }
-        delete(&m_layers[layer]);
-    }
-    delete (&m_layers);
-    delete(&m_error);
-    delete(&m_recentAverageError);
-    delete(&m_recentAverageSmoothingFactor);
+//    for (unsigned layer = 0; layer < m_layers.size(); ++layer) {
+
+//        for (unsigned i = 0; i < m_layers[layer].size(); ++i) {
+
+//            for (unsigned j = 0; j < m_layers[layer][j].m_outputWeights.size(); ++j) {
+
+//                delete(&m_layers[layer][j].m_outputWeights[j]);
+//            }
+//            delete(&m_layers[layer][i]);
+//        }
+//        delete(&m_layers[layer]);
+//    }
+//    delete(&m_layers);
+//    delete(&m_error);
+//    delete(&m_recentAverageError);
+//    delete(&m_recentAverageSmoothingFactor);
 }
 
 Net::Net(const std::vector<unsigned> &topology)

@@ -21,7 +21,10 @@ public:
     void updateInputWeights(Layer& prevLayer);
 
     std::vector<Connection> m_outputWeights;
+
+    ~Neuron();
 private:
+    int i;
     static double randomWeight();
 
     static double activationFunction(double x);

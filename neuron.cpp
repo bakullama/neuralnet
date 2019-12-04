@@ -2,21 +2,30 @@
 #include "connection.h"
 #include <cstdlib>
 #include <cmath>
+#include <iostream>
 
+double Neuron::lr = 0.5;
+
+Neuron::~Neuron() {
+//    std::cout << "Destructing neuron" << std::endl;
+}
 
 Neuron::Neuron(unsigned numOutputs, unsigned myIndex)
 {
-
+    static int j = 0;
+//    std::cout << "Constructing neuron" << std::endl;
     for (unsigned c = 0; c < numOutputs; ++c) {
         m_outputWeights.push_back(Connection());
         m_outputWeights.back().weight = randomWeight();
     }
 
     m_myIndex = myIndex;
+    i = j;
 
+    j++;
 }
 
-double Neuron::lr = 0.5;
+
 
 void Neuron::feedForward(const Layer &prevLayer) {
     double sum = 0.0;
