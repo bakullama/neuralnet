@@ -21,7 +21,7 @@ int main() {
 
     std::vector<double> resultVals;
     int i;
-    for (i = 0; i < 100; ++i) {
+    for (i = 0; i < 1000; ++i) {
         for (int j = 0; j < 4; ++j) {
             net.feedForward(inputVals[j]); // training
             net.backProp(targetVals[j]);
