@@ -74,9 +74,9 @@ double Neuron::sumDOW(const Layer& nextLayer) const {
 double Neuron::activationFunction(double x) {
     // tanh - output range [-1 ... +1]
 //    return tanh(x);
-    std::cout << "x: " << x << std::endl;
-    std::cout << "exp(-x): " << exp(-x) << std::endl;
-    return 1 / (1-exp(-x));
+//    std::cout << "x: " << x << std::endl;
+//    std::cout << "exp(-x): " << exp(-x) << std::endl;
+    return 1 / (1+exp(-x));
 }
 
 
