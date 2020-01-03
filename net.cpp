@@ -6,7 +6,7 @@
 #include <cmath>
 
 
-Net::~Net() {
+//Net::~Net() {
 //    for (unsigned layer = 0; layer < m_layers.size(); ++layer) {
 
 //        for (unsigned i = 0; i < m_layers[layer].size(); ++i) {
@@ -23,7 +23,7 @@ Net::~Net() {
 //    delete(&m_error);
 //    delete(&m_recentAverageError);
 //    delete(&m_recentAverageSmoothingFactor);
-}
+//}
 
 Net::Net(const std::vector<unsigned> &topology)
 {

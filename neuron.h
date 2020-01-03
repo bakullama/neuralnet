@@ -22,7 +22,7 @@ public:
 
     std::vector<Connection> m_outputWeights;
 
-    ~Neuron();
+//    ~Neuron();
 private:
     int i;
     static double randomWeight();

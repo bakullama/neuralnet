@@ -13,7 +13,7 @@ public:
     void backProp(const std::vector<double> &targetVals);
     void getResults(std::vector<double> &resultVals) const;
 
-    ~Net();
+//    ~Net();
 private:
     std::vector<Layer> m_layers; // m_layers[layerNum][neuronNum]
     double m_error;

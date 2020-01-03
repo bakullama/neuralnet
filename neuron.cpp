@@ -6,9 +6,9 @@
 
 double Neuron::lr = 0.5;
 
-Neuron::~Neuron() {
-//    std::cout << "Destructing neuron" << std::endl;
-}
+//Neuron::~Neuron() {
+////    std::cout << "Destructing neuron" << std::endl;
+//}
 
 Neuron::Neuron(unsigned numOutputs, unsigned myIndex)
 {
@@ -21,7 +21,7 @@ Neuron::Neuron(unsigned numOutputs, unsigned myIndex)
 
     m_myIndex = myIndex;
     i = j;
-
+    
     j++;
 }
 
@@ -73,16 +73,18 @@ double Neuron::sumDOW(const Layer& nextLayer) const {
 
 double Neuron::activationFunction(double x) {
     // tanh - output range [-1 ... +1]
-    return tanh(x);
-//    return 1 / (1-exp(-x));
+//    return tanh(x);
+    std::cout << "x: " << x << std::endl;
+    std::cout << "exp(-x): " << exp(-x) << std::endl;
+    return 1 / (1-exp(-x));
 }
 
 
 double Neuron::activationFunctionDerivative(double x) {
     // tanh derivative
-    return 1 - x * x;
+//    return 1 - x * x;
     // sigmoid deriv
-//    return activationFunction(x) * (1 - activationFunction(x));
+    return activationFunction(x) * (1 - activationFunction(x));
 
 }
 

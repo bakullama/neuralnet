@@ -19,16 +19,23 @@ int main() {
         {0}, {1}, {1}, {0}
     };
 
-
-    for (int i = 0; i < 1000; ++i) {
+    std::vector<double> resultVals;
+    int i;
+    for (i = 0; i < 1; ++i) {
         for (int j = 0; j < 4; ++j) {
             net.feedForward(inputVals[j]); // training
             net.backProp(targetVals[j]);
+            std::cout << "input: | " << inputVals[j][0] << " | " << inputVals[j][1];
+            std::cout << " | :: output: ";
+            net.feedForward(inputVals[j]);
+            net.getResults(resultVals);
+            std::cout << resultVals[0] << std::endl;
         }
     }
 
+    resultVals.clear();
+    std::cout << "run through " << i << " time(s)" << std::endl;
 
-    std::vector<double> resultVals;
     for (int j = 0; j < 4; ++j) {
         std::cout << "input: | " << inputVals[j][0] << " | " << inputVals[j][1];
         std::cout << " | :: output: ";
