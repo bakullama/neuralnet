@@ -82,9 +82,9 @@ double Neuron::activationFunction(double x) {
 
 double Neuron::activationFunctionDerivative(double x) {
     // tanh derivative
-//    return 1 - x * x;
+    return 1 - x * x;
     // sigmoid deriv
-    return activationFunction(x) * (1 - activationFunction(x));
+//    return activationFunction(x) * (1 - activationFunction(x));
 
 }
 
