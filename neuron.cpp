@@ -4,7 +4,7 @@
 #include <cmath>
 #include <iostream>
 
-double Neuron::lr = 0.05;
+double Neuron::lr = 0.5;
 
 //Neuron::~Neuron() {
 ////    std::cout << "Destructing neuron" << std::endl;
@@ -51,7 +51,7 @@ void Neuron::updateInputWeights(Layer& prevLayer) {
     }
 }
 
-void Neuron::calcOutputGradients(double targetVal) {
+void Neuron::calcOutputGradients(const double targetVal) {
     double delta = targetVal - m_outputVal;
     m_gradient = delta * activationFunctionDerivative(m_outputVal);
 }
@@ -73,11 +73,11 @@ double Neuron::sumDOW(const Layer& nextLayer) const {
 
 double Neuron::activationFunction(double x) {
     // tanh - output range [-1 ... +1]
-//    return tanh(x);
+    return tanh(x);
 //    std::cout << "x: " << x << std::endl;
 //    std::cout << "exp(-x): " << exp(-x) << std::endl;
-    std::cout << "1 / (1+exp(-x)): " << 1 / (1+exp(-x)) << std::endl;
-    return 1 / (1+exp(-x));
+//    std::cout << "1 / (1+exp(-x)): " << 1 / (1+exp(-x)) << std::endl;
+//    return 1 / (1+exp(-x));
 }
 
 
