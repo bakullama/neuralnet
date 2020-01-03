@@ -4,7 +4,7 @@
 #include <cmath>
 #include <iostream>
 
-double Neuron::lr = 0.5;
+double Neuron::lr = 0.05;
 
 //Neuron::~Neuron() {
 ////    std::cout << "Destructing neuron" << std::endl;
@@ -76,6 +76,7 @@ double Neuron::activationFunction(double x) {
 //    return tanh(x);
 //    std::cout << "x: " << x << std::endl;
 //    std::cout << "exp(-x): " << exp(-x) << std::endl;
+    std::cout << "1 / (1+exp(-x)): " << 1 / (1+exp(-x)) << std::endl;
     return 1 / (1+exp(-x));
 }
 
